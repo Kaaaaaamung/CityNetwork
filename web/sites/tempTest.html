@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="https://networkcube.github.io/networkcube/core/networkcube.js"></script>
+
+<script>
+    //define link schema
+    var linkSchema = {  source: 0,
+        target: 1,
+        weight: 2,
+        time: 3,
+        linkType: 4}
+
+// load data file with the above link schema
+    var myDataSet = networkcube.loadLinkTable('scientists.csv', importAndVisualize, linkSchema, ',', 'YYYY');
+
+// create a session for this data set.
+    var session = 'demo';
+
+    function importAndVisualize(dataset){
+
+        // import data into browser's localstorage.
+        networkcube.importData(session, dataset);
+
+        // call visualization in new browser window
+        networkcube.openVisualizationWindow(
+            session,
+            'https://networkcube.github.io/networkcube/visualizations/nodelink/index.html',
+            dataSet.name);
+    }
+
+    networkcube.openVisualizationWindow(
+        'demo',
+        'url/to/visualization',
+        'myDataSet');
+
+
+</script>
+</body>
+</html>
